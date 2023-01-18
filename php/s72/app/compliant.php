@@ -1,4 +1,7 @@
 <?php
+// SPDX-FileCopyrightText: 2023 Davidson <twister@davidson.fr>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 require('../env.php');
 
 $mysqli = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME)

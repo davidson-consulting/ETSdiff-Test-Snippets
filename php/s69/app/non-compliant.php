@@ -1,4 +1,7 @@
 <?php
+// SPDX-FileCopyrightText: 2023 Davidson <twister@davidson.fr>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 require('../env.php');
 
 $query = 'SELECT code_zas, zas, polluant, MAX(valeur), count(valeur) FROM mesures_originales WHERE validite = 1 GROUP BY code_zas, zas, polluant ORDER BY zas, polluant';
