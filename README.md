@@ -46,7 +46,7 @@ We use [OpenDataBDD](http://git-twister.davidson-idf.fr/davidson/greenit/opendat
 
 To run one test you need [ETSdiff](http://git-twister.davidson-idf.fr/davidson/greenit/etsdiff)
 
-**IMPORTANT** befor you be able to run etsdiff you need to create bdd variants config file ie:
+**IMPORTANT** before you be able to run etsdiff you need to create bdd variants config file ie:
 
 ```
 cd php/s72
