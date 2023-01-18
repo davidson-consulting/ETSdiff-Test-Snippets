@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2023 Davidson <twister@davidson.fr>
+SPDX-License-Identifier: CC-BY-NC-SA-4.0
+-->
+
 # Tests Snippets
 
 ## About
@@ -12,7 +17,7 @@ Acutaly only for ecocode rules
 
 ```
 * (local copie repository)
-|-- rules.txt (description of rules code)
+|-- rules.md (description of rules code)
 `-- $(language) (ie: php)
     |-- $(ruleid) (rule code ie: s74)
     |   |-- ets.yml (ETSdiff configuration file to run the test
