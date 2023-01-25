@@ -14,7 +14,9 @@ $row = $result->fetch_row();
 $i = 0;
 while ($i < $row[0]) {
 	$var = $i . ': My variable with replacement'; 
-	printf('%s'.PHP_EOL, $var);
+	if ($i % 1000 == 0) {
+		printf('%s'.PHP_EOL, $var);
+	}
 	$i++;
 }
 
