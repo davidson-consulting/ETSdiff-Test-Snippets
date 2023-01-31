@@ -13,7 +13,9 @@ $row = $result->fetch_row();
 
 $i = 0;
 while ($i < $row[0]) {
-	printf('%s'.PHP_EOL, $i);
+	if ($i % 1000 == 0) {
+		printf('%s'.PHP_EOL, $i);
+	}
 	++$i;
 }
 
