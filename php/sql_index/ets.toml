@@ -3,7 +3,7 @@
 
 [Scheduler]
 type = "StageredScheduler"
-nb_iteration = 2
+nb_iteration = 20
 
 
 [Services]
