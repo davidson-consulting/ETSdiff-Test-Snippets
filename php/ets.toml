@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText = 2023 Davidson <twister@davidson.fr>
+# SPDX-License-Identifier = CC0-1.0
+
+[Scheduler]
+type = "StageredScheduler"
+nb_iteration = 20
+
+
+[Services]
+
+[Services.Backend]
+process_name = "apache2"
+ports = [ 80 ]
+storage_paths = [ "./app" ]
+prepare = "docker-compose up -d"
+release = "docker-compose down"
+    
+[Services.Database]
+process_name = "mysqld"
+ports = [ 3306 ]
+storage_paths = [ "../../opendatabdd/mysql/polluants_(NB_MONTHS)m/mysql_data/polluants/" ]
+prepare = "docker-compose -f ../../opendatabdd/mysql/polluants_(NB_MONTHS)m/docker-compose.yml up -d"
+release = "docker-compose -f ../../opendatabdd/mysql/polluants_(NB_MONTHS)m/docker-compose.yml down"
+
+
+[Tests]
+
+[Tests.Compliant]
+type = "SystemCall"
+services_names = [ "Backend", "Database" ]
+command_line = "wget -q http://127.0.0.1/test/compliant.php -O compliant.txt"
+
+[Tests.Non-compliant]
+type = "SystemCall"
+services_names = [ "Backend", "Database" ]
+command_line = "wget -q http://127.0.0.1/test/non-compliant.php -O non-compliant.txt"
