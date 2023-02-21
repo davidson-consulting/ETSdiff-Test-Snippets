@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText = 2023 Davidson <twister@davidson.fr>
+# SPDX-License-Identifier = CC0-1.0
+
+[Scheduler]
+type = "StageredScheduler"
+nb_iteration = 2
+
+
+[Services]
+
+[Services.Backend]
+process_name = "apache2"
+ports = [ 80 ]
+storage_paths = [ "./app" ]
+prepare = "docker-compose up -d"
+release = "docker-compose down"
+    
+[Services.Database]
+process_name = "mysqld"
+ports = [ 3306 ]
+storage_paths = [ "../../opendatabdd/mysql/polluants_1m/mysql_data/polluants/" ]
+prepare = "docker-compose -f ../../opendatabdd/mysql/polluants_1m/docker-compose.yml up -d"
+release = "docker-compose -f ../../opendatabdd/mysql/polluants_1m/docker-compose.yml down"
+    
+[Services.DatabaseNoIndex]
+process_name = "mysqld"
+ports = [ 3306 ]
+storage_paths = [ "../../opendatabdd/mysql/polluants_1m_noindex/mysql_data/polluants/" ]
+prepare = "docker-compose -f ../../opendatabdd/mysql/polluants_1m_noindex/docker-compose.yml up -d"
+release = "docker-compose -f ../../opendatabdd/mysql/polluants_1m_noindex/docker-compose.yml down"
+
+
+[Tests]
+
+[Tests.Index]
+type = "SystemCall"
+services_names = [ "Backend", "Database" ]
+command_line = "wget -q http://127.0.0.1/test/query.php -O index.txt"
+
+[Tests.NoIndex]
+type = "SystemCall"
+services_names = [ "Backend", "DatabaseNoIndex" ]
+command_line = "wget -q http://127.0.0.1/test/query.php -O no-index.txt"
